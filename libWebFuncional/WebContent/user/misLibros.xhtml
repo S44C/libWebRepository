@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Mi Perfil</title>
+</h:head>
+
+<h:body>
+	<h1>Mis Libros</h1>
+	<div>
+		<h:form>
+			<p:panelGrid columns="2">
+				<p:commandButton value="Agregar Libro"
+					action="#{leftOverBookBean.prepararAdicionarLibroSobrante}" />
+				<p:commandButton value="Regresar" action="perfilUsuario" />
+			</p:panelGrid>
+		</h:form>
+	</div>
+	<div>
+		<p:dataTable var="Leftoverbook" value="#{leftOverBookBean.librosUser}"
+			rows="8" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:outputText value="#{Leftoverbook.id}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Autor" />
+				</f:facet>
+				<h:outputText value="#{Leftoverbook.author}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Fecha Edición" />
+				</f:facet>
+				<h:outputText value="#{Leftoverbook.date}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Edición" />
+				</f:facet>
+				<h:outputText value="#{Leftoverbook.edition}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Editorial" />
+				</f:facet>
+				<h:outputText value="#{Leftoverbook.editorial}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Nombre" />
+				</f:facet>
+				<h:outputText value="#{Leftoverbook.name}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Opciones" />
+				</f:facet>
+				<p:panelGrid columns="1">
+					<p:commandButton value="Editar"
+						action="#{leftOverBookBean.prepararModificarLibroSobrante}" />
+					<p:commandButton value="Eliminar"
+						action="#{leftOverBookBean.eliminarLibro}" />
+				</p:panelGrid>
+			</p:column>
+		</p:dataTable>
+		<h:form>
+			<p:commandButton value="Regresar" action="perfilUsuario" />
+		</h:form>
+	</div>
+</h:body>
+</html>

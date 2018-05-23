@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Inicio</title>
+	<script language="JavaScript">
+		function valida_entrada() {
+			var username = document.getElementById('ingreso:username').value;
+			var password = document.getElementById('ingreso:password').value;
+
+			if (username.trim() == "" || password.trim() == "") {
+				alert("Para ingresar debes llenar todos los campos");
+				return false;
+			}
+
+			else {
+				return true;
+			}
+
+		}
+	</script>
+
+</h:head>
+
+<h:body>
+
+	<div align="center" id="formdiv">
+		<h1>Inicio de Sesión</h1>
+		<h3>La contraseña que ingresaste no coincide con el usuario</h3>
+		<h:form id="frm">
+
+			<p:panelGrid>
+
+				<p:row>
+					<p:column>
+						<p>Usuario</p>
+					</p:column>
+					<p:column>
+						<p:inputText value="#{userBean.usuario.userName}" id="username" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Contraseña" />
+					</p:column>
+					<p:column>
+						<p:password value="#{userBean.usuario.password}" id="password" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column colspan="2">
+						<div align="center">
+							<p:commandButton value="Iniciar Sesión"
+								action="#{userBean.validarEntrada}"
+								onclick="return valida_entrada()" />
+						</div>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column colspan="2">
+						<div align="center">
+							<p:commandLink value="Regresar" action="index.xhtml"></p:commandLink>
+						</div>
+					</p:column>
+				</p:row>
+
+			</p:panelGrid>
+
+		</h:form>
+	</div>
+
+</h:body>
+</html>

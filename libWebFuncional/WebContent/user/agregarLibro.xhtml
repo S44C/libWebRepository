@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Agregar Libro</title>
+</h:head>
+
+<h:body>
+	<h1>Agregar Libro</h1>
+	<h:form>
+		<p:panelGrid id="panel" border="1" cellpadding="10">
+
+			<p:row>
+				<p:column colspan="2" style="background-color: grey">
+					<b> <h:outputText value="Nuevo Libro" /></b>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Nombre Libro" />
+				</p:column>
+
+				<p:column>
+					<h:inputText value="#{leftOverBookBean.libroSobrante.name}" required="true"
+						requiredMessage="Escriba su el nombre del libro" id="name" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Autor" />
+				</p:column>
+
+				<p:column>
+					<h:inputText value="#{leftOverBookBean.libroSobrante.author}" required="true"
+						requiredMessage="Escriba el autor" id="auhtor" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Edicion" />
+				</p:column>
+
+				<p:column>
+					<h:inputText value="#{leftOverBookBean.libroSobrante.edition}"
+						required="true" requiredMessage="Escriba la edición del libro" id="edition" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Editorial" />
+				</p:column>
+
+				<p:column>
+					<p:inputText value="#{leftOverBookBean.libroSobrante.editorial}"
+						required="true" requiredMessage="Escriba la editorial del libro"
+						id="phone" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column colspan="2" style="background-color: grey">
+					<p:commandButton value="Aceptar" action="#{leftOverBookBean.adicionarLibroSobrante}"/>
+					<br />
+				</p:column>
+			</p:row>
+
+		</p:panelGrid>
+
+	</h:form>
+
+	<h:form>
+		<p:panel border="1" cellpadding="10" cellspacing="0">
+			<h:commandLink action="misLibros" value="Regresar" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

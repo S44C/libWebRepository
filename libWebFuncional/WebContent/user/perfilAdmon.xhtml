@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Mi Perfil (Administrador)</title>
+</h:head>
+
+<h:body>
+	<h1>Administrador</h1>
+
+	<h:form>
+	<h:panelGrid columns="1">
+	<h2>Gestión de Usuarios</h2>
+	<p:commandButton  value="Continuar" action="gestionUsuarios" />
+
+	<h2>Trazabilidad de Usuarios</h2>
+	<p:commandButton action="auditoriaUsuarios" value="Continuar" />
+	
+	<h5>Cerrar Sesión</h5>
+	<p:commandButton action="#{userBean.cerrarSesion}" value="Cerrar Sesión"/>
+	</h:panelGrid>
+	</h:form>
+	
+</h:body>
+</html>

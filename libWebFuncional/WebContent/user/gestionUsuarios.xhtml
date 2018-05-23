@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Gestión de Usuarios</title>
+</h:head>
+
+<h:body>
+	<h1>Gestión de Usuarios</h1>
+
+	<p:commandButton action="perfilAdmon" value="Regresar" />
+	<p:dataTable var="user" value="#{userBean.listarUsuarios}" rows="8"
+		paginator="true"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+			<h:outputText value="#{user.id}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="User Name" />
+			</f:facet>
+			<h:outputText value="#{user.userName}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Password" />
+			</f:facet>
+			<h:outputText value="********" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Full Name" />
+			</f:facet>
+			<h:outputText value="#{user.fullName}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="E-mail" />
+			</f:facet>
+			<h:outputText value="#{user.emailAddress}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Phone Number" />
+			</f:facet>
+			<h:outputText value="#{user.phoneNumber}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Date Last Password" />
+			</f:facet>
+			<h:outputText value="#{user.dateLastPassword}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="User Type" />
+			</f:facet>
+			<h:outputText value="#{user.userType}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Address" />
+			</f:facet>
+			<h:outputText value="#{user.address}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Active" />
+			</f:facet>
+			<h:outputText value="Activo" rendered="#{'A' eq user.active}" />
+			<h:outputText value="InActivo" rendered="#{'I' eq user.active}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Modificar" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{userBean.prepararModificarUsuario}"
+					value="Modificar" />
+			</h:form>
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Inactivar" />
+			</f:facet>
+			<h:form>
+				<p:panelGrid columns="1" cellpading="0">
+					<h:commandButton action="#{userBean.activarUsuario}"
+						value="Activar" />
+					<h:commandButton action="#{userBean.eliminarUsuario}"
+						value="Eliminar" />
+					<h:commandButton action="#{userBean.enviarCorreo}" value="Correo" />
+				</p:panelGrid>
+
+			</h:form>
+		</p:column>
+
+
+	</p:dataTable>
+
+	<p:commandButton action="perfilAdmon" value="Regresar" />
+
+</h:body>
+</html>

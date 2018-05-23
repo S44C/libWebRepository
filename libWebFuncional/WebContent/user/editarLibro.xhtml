@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Modificar Libro</title>
+</h:head>
+
+<h:body>
+	<h1>Modificar Libro</h1>
+	<h:form>
+		<p:panelGrid id="panel" columns="2" border="1" cellpadding="10">
+ 
+			<f:facet name="header">
+				<h:outputText value="Registrarse" />
+			</f:facet>
+
+			<p:outputLabel value="Nombre" />
+			<p:inputText value="#{leftOverBookBean.libroSobrante.name}"/>
+			<p:outputLabel value="Autor" />
+			<p:inputText value="#{leftOverBookBean.libroSobrante.author}" />
+			<p:outputLabel value="Edición" />
+			<p:inputText value="#{leftOverBookBean.libroSobrante.edition}"/>
+			<p:outputLabel value="Editorial" />
+			<p:inputText value="#{leftOverBookBean.libroSobrante.editorial}"/>
+
+			<f:facet name="footer">
+				<p:panelGrid columns="2">
+					<p:commandButton action="#{leftOverBookBean.modificarLibroSobrante}" value="Continuar" />
+					
+					<h:commandLink action="misLibros" value="Regresar" />
+				</p:panelGrid>
+			</f:facet>
+
+		</p:panelGrid>
+
+
+	</h:form>
+</h:body>
+</html>

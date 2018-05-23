@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>libWeb</title>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script language="JavaScript">
+		function valida_registro() {
+			String
+			alerta = "";
+			var nickname = document.getElementById('register:nickname').value;
+			var fullname = document.getElementById('register:fullname').value;
+			var mail = document.getElementById('register:mail').value;
+			var phone = document.getElementById('register:phone').value;
+
+			if (nickname.trim() == "") {
+				alerta += "- Escribe el nickname \n";
+			}
+			if (fullname.trim() == "") {
+				alerta += "- Escribe tu nombre completo \n";
+			}
+			if (mail.trim() == "") {
+				alerta += "- Escribe tu correo \n";
+			}
+			if (phone.trim() == "") {
+				alerta += "- Escribe tu número de celular \n";
+			}
+
+			if (nickname.length != 8) {
+				alerta += "- Tu nicname debe ser de 8 caracteres\n";
+			}
+
+			var goodMail = /[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|org|edu|es)/
+					.test(mail);
+			if (!goodMail) {
+				alerta += "- Escribe un correo valido \n";
+			}
+
+			if (!phone.match(/\b\d+\b/)) {
+				alerta += "- Revisa que el número de celular solo tenga numeros \n";
+			}
+
+			if (!nickname.match(/^[a-z0-9]+$/i)) {
+				alerta += "- El nickname solo puede contener numeros y letras sin espacios \n";
+			}
+
+			if (phone.length != 10) {
+				alerta += "- El número de celular debe tener 10 digitos";
+			}
+
+			if (alerta != "") {
+				alert(alerta);
+				return false;
+			}
+
+			alert("Revisa tu correo, si no te ha llegado nada es porque debes completar el Captcha");
+
+			return true;
+		}
+
+		function valida_cambio() {
+
+			var mail = document.getElementById('forgot:email').value;
+			var goodMail = /[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|org|edu|es)/
+					.test(mail);
+
+			if (mail.trim() == "") {
+				alert("Debes escribir el correo para pedir el cambio de contraseña");
+				return false;
+			} else if (!goodMail) {
+				alert("Debes escribir un correo valido (Ten en cuenta que solo puede terminar en .net .edu. com .org .es )");
+				return false;
+			} else {
+				alert("Revisa tu correo, te enviamos una contraseña temporal");
+				return true;
+			}
+		}
+
+		function valida_entrada() {
+			var username = document.getElementById('ingreso:username').value;
+			var password = document.getElementById('ingreso:password').value;
+
+			if (username.trim() == "" || password.trim() == "") {
+				alert("Para ingresar debes llenar todos los campos");
+				return false;
+			}
+
+			else {
+				return true;
+			}
+
+		}
+	</script>
+</h:head>
+
+<h:body>
+
+	<ui:insert>
+		<h:form id="ingreso">
+			<h:panelGroup>
+				<h:outputStylesheet library="css" name="style.css" />
+				<div align="center">
+
+					<p:column>
+						<p:row>
+							<h:graphicImage library="images" name="imgInicio.png"
+								align="center" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<div class="group">
+								<h:inputText id="username" value="#{userBean.usuario.userName}">
+								</h:inputText>
+								<p:watermark for="username" value="usuario"></p:watermark>
+								<div class="bar"></div>
+							</div>
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<div class="group">
+								<h:inputSecret id="password"
+									value="#{userBean.usuario.password}">
+								</h:inputSecret>
+								<p:watermark for="password" value="contraseña"></p:watermark>
+								<div class="bar"></div>
+							</div>
+						</p:row>
+					</p:column>
+
+					<h:outputStylesheet library="css" name="button.css" />
+					<p:column>
+						<p:row>
+							<h:commandButton actionListener="#{userBean.validarEntrada}"
+								styleClass="button" value="Iniciar Sesión"
+								onclick="return valida_entrada()">
+							</h:commandButton>
+						</p:row>
+						<p:row>
+							<p:commandLink value="Olvide mi contraseña"
+								oncomplete="PF('dlg3').show();">
+							</p:commandLink>
+						</p:row>
+					</p:column>
+				</div>
+
+			</h:panelGroup>
+
+		</h:form>
+	</ui:insert>
+
+	<h:form>
+
+		<h:outputStylesheet library="css" name="button2.css" />
+
+		<div class="button2">
+			<p:commandButton value="Registrarme"
+				action="#{userBean.prepararAdicionarUsuario}"
+				oncomplete="PF('dlg2').show();" />
+		</div>
+
+	</h:form>
+
+
+	<h:form id="register">
+
+		<p:dialog header="Registro" widgetVar="dlg2" modal="true" width="700"
+			height="460">
+
+			<p:panelGrid id="panel" border="0" cellpadding="10">
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Nickname" />
+					</p:column>
+
+					<p:column>
+						<h:inputText value="#{userBean.usuario.userName}" id="nickname"
+							maxlength="8" />
+					</p:column>
+
+					<p:column>
+						<h:outputText value="❓" id="t1" />
+						<p:tooltip for="t1"
+							value="Tu nickname no puede tener espacios ni caracteres especiales además
+					  debe ser de 8 caracteres"
+							position="top" />
+					</p:column>
+
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Nombres y Apellidos" />
+					</p:column>
+
+					<p:column>
+						<h:inputText value="#{userBean.usuario.fullName}" id="fullname"
+							maxlength="60" />
+					</p:column>
+
+					<p:column>
+						<h:outputText value="❓" id="t2" />
+						<p:tooltip for="t2" value="Escribe tus nombres y apellidos reales"
+							position="top" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Correo" />
+					</p:column>
+
+					<p:column>
+						<h:inputText value="#{userBean.usuario.emailAddress}" id="mail"
+							maxlength="75">
+						</h:inputText>
+						<h:message for="mail"></h:message>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="❓" id="t3" />
+						<p:tooltip for="t3"
+							value="Tu correo debe terminar en .com .net .es .org .edu  P.e: admonlibweb@gmail.com"
+							position="top" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Teléfono" />
+					</p:column>
+
+					<p:column>
+						<h:inputText value="#{userBean.usuario.phoneNumber}" id="phone"
+							maxlength="10" />
+					</p:column>
+
+					<p:column>
+						<h:outputText value="❓" id="t4" />
+						<p:tooltip for="t4"
+							value="Tu número de celular debe ser de diez dígitos sin espacios, prometemos cuidar de tu información"
+							position="top" />
+					</p:column>
+				</p:row>
+
+
+				<p:row>
+					<p:column colspan="3">
+						<div align="center">
+							<p:messages showDetail="true" />
+							<p:captcha label="Captcha" language="es"
+								requiredMessage="Debes llenar este campo" />
+						</div>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column colspan="3">
+						<div align="center">
+							<p:commandButton value="Registrarme"
+								actionListener="#{captchaView.submit}" ajax="false"
+								icon="ui-icon-check" action="#{userBean.adicionarUsuario}"
+								onclick="return valida_registro()" />
+
+						</div>
+
+					</p:column>
+				</p:row>
+
+
+
+			</p:panelGrid>
+
+		</p:dialog>
+	</h:form>
+
+
+	<h:form id="forgot">
+
+		<p:dialog header="Olvide mi Contraseña" widgetVar="dlg3" modal="true"
+			width="700" height="100">
+
+			<p:panelGrid columns="2" cellpadding="10">
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Correo" />
+					</p:column>
+
+					<p:column>
+						<p:inputText value="#{userBean.correo}" id="email" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<p:commandButton value="Confirmar Cambio"
+							action="#{userBean.olvidarContrasena}"
+							onclick="return valida_cambio()" />
+					</p:column>
+				</p:row>
+
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+
+
+</h:body>
+</html>

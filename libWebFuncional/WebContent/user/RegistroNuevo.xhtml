@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Registro Usuario</title>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+</h:head>
+
+<h:body>
+	<h1>Registro</h1>
+	<h:form>
+		<p:panelGrid id="panel" border="1" cellpadding="10">
+
+			<p:row>
+				<p:column colspan="2" style="background-color: grey">
+					<b> <h:outputText value="Registrarse" /></b>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Nickname" />
+				</p:column>
+
+				<p:column>
+					<h:inputText value="#{userBean.usuario.userName}" required="true"
+						requiredMessage="Escriba su nickname" id="nickname" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Nombres y Apellidos" />
+				</p:column>
+
+				<p:column>
+					<h:inputText value="#{userBean.usuario.fullName}" required="true"
+						requiredMessage="Escriba su nombre" id="fullname" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Correo" />
+				</p:column>
+
+				<p:column>
+					<h:inputText value="#{userBean.usuario.emailAddress}"
+						required="true" requiredMessage="Escriba su correo" id="mail" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Teléfono" />
+				</p:column>
+
+				<p:column>
+					<p:inputText value="#{userBean.usuario.phoneNumber}"
+						required="true" requiredMessage="Escriba su numero de celular"
+						id="phone" maxlength="10"/>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column>
+					<h:outputLabel value="Dirección" />
+				</p:column>
+
+				<p:column>
+					<p:inputText value="#{userBean.usuario.address}"
+						required="true" requiredMessage="Escriba su numero de dirección"
+						id="address"/>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column colspan="2">
+					<p:messages showDetail="true" />
+					<p:captcha label="Captcha" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column colspan="2" style="background-color: grey">
+					<p:commandButton value="Registrarme"
+						actionListener="#{captchaView.submit}" ajax="false"
+						icon="ui-icon-check" action="#{userBean.adicionarUsuario}" />
+					<br />
+				</p:column>
+			</p:row>
+
+		</p:panelGrid>
+
+	</h:form>
+
+	<h:form>
+		<p:panel border="1" cellpadding="10" cellspacing="0">
+			<h:commandLink action="#{userBean.cerrarSesion}" value="Regresar" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

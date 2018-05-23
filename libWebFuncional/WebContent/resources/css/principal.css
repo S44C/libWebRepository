@@ -1,0 +1,39 @@
+.btn {
+	-webkit-border-radius: 60;
+	-moz-border-radius: 60;
+	border-radius: 60px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 30px;
+	background: #17CCB7;
+	padding: 10px 100px 10px 100px;
+	text-decoration: none
+}
+
+.btn:hover {
+	background: #0f7f72;
+	text-decoration: none;
+}
+
+.btn2 {
+	-webkit-border-radius: 60;
+	-moz-border-radius: 60;
+	border-radius: 60px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 30px;
+	background: #17CCB7;
+	padding: 10px 50px 10px 50px;
+	text-decoration: none
+}
+
+.btn2:hover {
+	background: #0f7f72;
+	text-decoration: none;
+}
+
+.img {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}

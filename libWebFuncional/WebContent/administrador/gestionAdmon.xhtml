@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Gestión de Usuarios</title>
+</h:head>
+
+<h:body>
+
+	<h:panelGroup>
+		<h:outputStylesheet library="css" name="principal.css" />
+		<h:graphicImage library="images" name="logoPeque.png" styleClass="img" />
+
+		<p:row>
+			<h:form>
+				<p:column>
+					<h:commandButton value="GESTIÓN" action="gestionAdmon"
+						styleClass="btn"></h:commandButton>
+				</p:column>
+
+				<p:column>
+					<h:commandButton value="AUDITORÍA" action="trazabilidadTodos"
+						styleClass="btn"></h:commandButton>
+				</p:column>
+
+				<p:column>
+					<h:commandButton value="CERRAR SESIÓN"
+						action="#{userBean.cerrarSesion}" styleClass="btn"></h:commandButton>
+				</p:column>
+
+			</h:form>
+		</p:row>
+	</h:panelGroup>
+
+	<br />
+	<br />
+
+	<p:dataTable var="user" value="#{userBean.listarUsuarios}" rows="8"
+		paginator="true"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+			<h:outputText value="#{user.id}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="User Name" />
+			</f:facet>
+			<h:outputText value="#{user.userName}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Password" />
+			</f:facet>
+			<h:outputText value="********" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Full Name" />
+			</f:facet>
+			<h:outputText value="#{user.fullName}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="E-mail" />
+			</f:facet>
+			<h:outputText value="#{user.emailAddress}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Phone Number" />
+			</f:facet>
+			<h:outputText value="#{user.phoneNumber}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Date Last Password" />
+			</f:facet>
+			<h:outputText value="#{user.dateLastPassword}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="User Type" />
+			</f:facet>
+			<h:outputText value="#{user.userType}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Active" />
+			</f:facet>
+			<h:outputText value="Activo" rendered="#{'A' eq user.active}" />
+			<h:outputText value="InActivo" rendered="#{'I' eq user.active}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Modificar" />
+			</f:facet>
+
+			<h:form>
+				<p:commandButton value="Modificar"
+					action="#{userBean.prepararModificarUsuario}"
+					oncomplete="PF('dlg2').show();" />
+			</h:form>
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Opciones" />
+			</f:facet>
+			<h:form>
+
+				<p:panelGrid columns="1" cellpading="0">
+					<p:commandButton action="#{userBean.activarUsuario}"
+						value="Activar" />
+
+					<p:commandButton action="#{userBean.eliminarUsuario}"
+						value="Eliminar" />
+
+					<p:commandButton value="Correo" action="#{userBean.enviarCorreo}"
+						oncomplete="PF('dlg3').show();" />
+
+				</p:panelGrid>
+
+			</h:form>
+		</p:column>
+
+
+	</p:dataTable>
+
+
+	<h:form>
+
+		<p:dialog header="Modificación usuario" widgetVar="dlg2" modal="true"
+			width="400" height="225">
+
+			<p:panelGrid id="modificar" columns="2" border="1" cellpadding="10">
+
+				<h:outputLabel value="Nickname" />
+				<h:inputText value="#{userBean.usuario.userName}" />
+				<h:outputLabel value="Nombres y Apellidos" />
+				<h:inputText value="#{userBean.usuario.fullName}" />
+				<h:outputLabel value="Correo" />
+				<h:inputText value="#{userBean.usuario.emailAddress}" />
+				<h:outputLabel value="Teléfono" />
+				<h:inputText value="#{userBean.usuario.phoneNumber}" />
+
+				<f:facet name="footer">
+					<h:panelGroup style="display:block; text-align:center">
+						<h:commandButton action="#{userBean.modificarUsuario}"
+							value="Continuar" />
+						<br />
+						<h:commandLink action="gestionAdmon" value="Regresar" />
+					</h:panelGroup>
+				</f:facet>
+
+			</p:panelGrid>
+		</p:dialog>
+
+
+		<p:dialog header="Enviar correo" widgetVar="dlg3" modal="true"
+			width="650" height="300">
+
+			<p:panelGrid id="correp" columns="2" border="1" cellpadding="10">
+
+				<f:facet name="header">
+					<h:outputText value="Información" />
+				</f:facet>
+
+				<p:outputLabel value="Para" />
+				<p:outputLabel value="#{userBean.emailUser}"></p:outputLabel>
+				<p:outputLabel value="Subject: "></p:outputLabel>
+				<p:inputText value="#{correoBean.subject}"></p:inputText>
+				<p:outputLabel value="Content: "></p:outputLabel>
+				<p:inputTextarea value="#{correoBean.bodyText}" rows="5" cols="60"
+					autoResize="false" maxlength="200"></p:inputTextarea>
+				<p:commandButton value="Enviar" action="#{correoBean.enviarCorreo}"></p:commandButton>
+				<p:commandButton value="Regresar" action="gestionUsuarios"></p:commandButton>
+			</p:panelGrid>
+
+		</p:dialog>
+
+
+
+
+
+
+	</h:form>
+
+</h:body>
+</html>

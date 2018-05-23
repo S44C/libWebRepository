@@ -1,0 +1,71 @@
+{
+	box-sizing: border-box;
+}
+
+body {
+	background: #FFFFFF;
+}
+
+.centered {
+	margin: auto;
+	position: absolute;
+	top: 65%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -100px;
+}
+
+.group {
+	width: 50%;
+	height: 115px;
+	overflow: hidden;
+	position: relative;
+}
+
+label {
+	position: relative;
+	top: 36.66667px;
+	color: rgba(255, 255, 255, 0.5);
+	font: 400 36.66667px calibri;
+	cursor: text;
+	transition: .25s ease;
+}
+
+input {
+	display: block;
+	width: 62%;
+	padding-top: 36.66667px;
+	border: none;
+	border-radius: 0;
+	color: black;
+	background: #FFFFFF;
+	font-size: 36.66667px;
+}
+
+input:valid ~ label {
+	top: 0;
+	font: 700 22px calibri;
+	color: rgba(0, 0, 0, 1);
+}
+
+input:focus {
+	outline: none;
+}
+
+input:focus ~ label {
+	top: 0;
+	font: 700 22px calibri;
+	color: #105D97;
+}
+
+.bar {
+	background: rgba(0, 0, 0, 1);
+	content: '';
+	width: 600px;
+	height: 3.66667px;
+	position: relative;
+}
+
+::selection {
+	background: rgba(193, 228, 255, 1);
+}
